@@ -3,13 +3,12 @@
 # PROJECT NO - P01
 # PROJECT TITLE - IMPLEMENTATION OF A BASIC SHELL
 # TEAM MEMBERS:
-# 1. ASHRITHA PARUPATI
+# 1. SRIKANTH YANALA
 # 2. SRAVANI SEELAM
-# 3. SRIKANTH YANALA
-
+# 3. ASHRITHA PARUPATI
 
 # import necessary modules
-import os,shutil,datetime,re
+import os,shutil,datetime,re,getpass,stat
 # try block is to handle exceptions
 try:
      # Define a function to list files in the current directory with optional parameters
@@ -27,7 +26,7 @@ try:
         elif param=='-l':
              # Detailed listing of files with mode, size, and modification time
             for item in os.scandir(cur_dir):
-                    mode = item.stat().st_mode
+                    mode = stat.filemode(item.stat().st_mode)
                     size = item.stat().st_size
                     modified_time = datetime.datetime.fromtimestamp(item.stat().st_mtime)
                     print(f"{mode}\t{item.name} \t Size: {size} bytes\t Last Modified: {modified_time}")
@@ -195,16 +194,20 @@ chmod xxx	                              change modify permission""")
     # Initialize a list to store command history
     history=[]
     # Create an infinite loop for the command line interface
+    c=0
     while True:
         # Get the current directory and display it
         cur_dir=os.getcwd()
         print(cur_dir,'>>',end="")
         # Get user input and add it to the history
-        input1=input()
-        history.append(input1)
+        if c==0:
+            input1=input()
+            if '!' not in input1:
+                history.append(input1)
+        c=0
      
          # Split the input into a list of words
-        inp=input1.lower().split()
+        inp=input1.split()
         #print(inp)
         # Handle various commands based on the input
         if len(inp)==1 and inp[0] in ['exit','exit()']:
@@ -250,7 +253,7 @@ chmod xxx	                              change modify permission""")
          # Handle the 'rm' command to remove files
         elif inp[0]=='rm':
             if len(inp) == 3 and inp[1] == "-r":
-                remove_file(os.getcwd()+'\\'+inp[2], recursive=True)
+                remove_file(os.getcwd()+'/'+inp[2], recursive=True)
             else:
                 for file in inp[1:]:
                     remove_file(file)
@@ -308,7 +311,7 @@ chmod xxx	                              change modify permission""")
         
          # Handle the 'who' command to list the users currently logged in
         elif inp[0]=='who':
-            print(os.getlogin())
+            print(getpass.getuser())
           
          # Display the command history
         elif inp[0]=='history':
@@ -317,7 +320,8 @@ chmod xxx	                              change modify permission""")
                
          # Execute a command from history
         elif '!' in inp[0]:
-            print(history[int(inp[0][1:])-1])
+            input1=history[int(inp[0][1:])-1]
+            c=1
            
          # changes the modify permission
         elif inp[0]=='chmod':
