@@ -11,9 +11,9 @@ This is a project written in python that implements a Virtual FileSystem. This p
 ### Instructions : 
 Import all packages and run walkthrough.py program
 
-Prettytable
-sqlite3
-datetime
+Prettytable,
+sqlite3,
+datetime.
 
 ### Running Commands : 
 1. ls -lah - lists all files including details like id, name, filetype, modes, datetime and so on
