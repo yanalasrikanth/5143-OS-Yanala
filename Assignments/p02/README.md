@@ -1,8 +1,8 @@
 ### 5143 - p02
 ### Filesystem project
 ### GROUP MEMBERS
- Srikanth yanala
- Sravani Seelam
+ Srikanth yanala,
+ Sravani Seelam,
  Ashritha Parupati
 
 ### Overview : 
