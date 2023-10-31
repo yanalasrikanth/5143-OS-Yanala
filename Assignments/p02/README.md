@@ -1,9 +1,9 @@
 ### 5143 - p02
 ### Filesystem project
 ### GROUP MEMBERS
- Srikanth yanala 
- Sravani Seelam
- Ashritha Parupati
+### Srikanth yanala
+### Sravani Seelam
+### Ashritha Parupati
 
 ### Overview : 
 This is a project written in python that implements a Virtual FileSystem. This project will implement a virtual database that uses Sqlite3 as its storage. We will not be storing files that huge, or storing thousands of them, so we should be fine. This virtual file system will store all content in a single table like you see below. Our table will contain columns that represent the properties commonly found in a Linux long listing (e.g., ls -l).
