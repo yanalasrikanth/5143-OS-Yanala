@@ -31,4 +31,4 @@ def setup_database(db_path):
 if __name__ == "__main__":
     db_path = "file_system.db"
     setup_database(db_path)
-    print(f"Database setup completed at {db_path
+    print(f"Database setup completed at {db_path}")
