@@ -46,7 +46,7 @@ def demo_command(fs, inp):
         
        # mkdir command creates a new directory.
     elif inp[0] == "mkdir":
-        fs.create_directory(fs.current_directory, inp[1], "user", "group", "rwxr-xr-x")
+        fs.create_directory(fs.current_directory, inp[1])
         print(f"Directory {inp[1]} created!")
         
         # cd command change to named directory.
@@ -56,7 +56,7 @@ def demo_command(fs, inp):
         
         # pwd displays the path of current directory.
     elif inp[0] == "pwd":
-        print(fs.current_directory)
+        print(fs.current_working_directory())
         
         # mv move the file successfully from inp[1] to inp[2].
     elif inp[0] == "mv":
@@ -82,32 +82,35 @@ def demo_command(fs, inp):
     elif inp[0] == "history":
         print("Command History: ",command_history)
     elif inp[0] == "touch":
-        fs.create_file(inp[1],inp[2],inp[3],inp[4],inp[5])
+        fs.create_file(inp[1])
         print("File created successfully")
+
+    # It deletes the files.
+     elif inp[0] == "rm":
+        fs.delete_file(inp[1])
+        print("File deleted successfully")
+
 
 # Main function to execute a series of commands.
 def main():
     # itialize the file system database.
     fs = FileSystem("my_database.db")
-    li=[
+    li=[["ls -lah"],
+    ["mkdir", "repo1/"],
     ["ls -lah"],
-    ["mkdir", "Fruits",],
-    ["ls -lah"],
-    ["cd", "Fruits"],
-    ["ls -lah"],
-    ["mkdir", "Apples"],
-    ["ls -lah"],
-    ["cd", ".."],
-    ["ls -lah"],
+    ["cd", "repo1/"],
     ["pwd"],
-    ["touch","1","somefile.txt","root","root","rwxr-xr-x"],
-    ["mv", "somefile.txt", "bananas"],
+    ["cd", ".."],
+    ["pwd"],
+    ["touch","demo.txt"],
     ["ls -lah"],
-    ["cp", "bananas/somefile.txt", "somefile/otherfile.txt"],
+    ["mv", "demo.txt", "demo1.txt"],
     ["ls -lah"],
-    ["rm -rf", "bananas"],
+    ["cp", "demo1.txt", "demo2.txt"],
     ["ls -lah"],
-    ["chmod", "somefile.txt", "777"],
+    ["mkdir", "repo2/"],
+    ["ls -lah"],
+    ["rm -rf", "repo2/"],
     ["ls -lah"],
     ["history"]]
     
